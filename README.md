@@ -47,9 +47,15 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 swift sft
 
 # 模型测试
 
+对于本项目，可以使用以下命令在终端中进行模型问答:
+```python 
+python testCHAT.py
+```
+
 对于本项目使用的测试集，主要使用以下命令分别进行模型测试：
 
 ```python
+cd test_file
 python testNER.py
 python testRE.py
 python testTC.py
@@ -59,6 +65,7 @@ python testQA.py
 对于测试结果的评价，主要使用以下命令分别进行结果的评估：
 
 ```
+cd test_file
 python eval_NER.py
 python eval_RE.py
 python eval_TC.py
