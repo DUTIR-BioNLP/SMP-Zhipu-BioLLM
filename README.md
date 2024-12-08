@@ -71,4 +71,6 @@ python eval_RE.py
 python eval_TC.py
 python eval_QA.py
 ```
+# 模型展示系统
 
+修改模型路径和权重路径后，终端输入python demo.py即可本地进行测试
