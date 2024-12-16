@@ -1,6 +1,6 @@
 # 模型权重
 
-模型权重[下载地址](https://modelscope.cn/models/DUTIRbionlp/SMP-Zhipu-BioLLM/)
+模型权重[下载地址](https://modelscope.cn/models/DUTIRbionlp/SMP-Zhipu-BioLLM-v0)
 
 # 训练框架
 
