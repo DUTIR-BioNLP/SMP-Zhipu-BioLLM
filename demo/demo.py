@@ -127,25 +127,40 @@ def generate(
         generator = "您的输入无效，请重新输入，谢谢！"
         return history + [{"role": "user", "content": message}, {"role": "assistant", "content": generator}]
 
-    history.append({"role": "user", "content": message})
+    history_list = []
+    for i in range(0, len(history), 2):  # 每次跳两步
+        user_message = history[i]["content"]
+        assistant_message = history[i + 1]["content"]
+        # 将每对 [message, generator] 加入到新列表
+        history_list.append([user_message, assistant_message])
 
-    inputs = tokenizer.apply_chat_template([history],
-                                       add_generation_prompt=True,
-                                       tokenize=True,
-                                       return_tensors="pt",
-                                       return_dict=True
-                                       )
-    inputs = inputs.to(device)
-
-    # gen_kwargs = {"max_length": 2500, "do_sample": True, "top_k": 1}
-    with torch.no_grad():
-        outputs = model.generate(**inputs, do_sample=True, max_new_tokens=max_new_tokens, temperature=temperature, top_p=top_p, eos_token_id=[151329,151336,151338])
-        outputs = outputs[:, inputs['input_ids'].shape[1]:]
-        response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-    history.append({"role": "assistant", "content": response})
+    request_list = [{'query': message, 'history':history_list}]
+    response_iterator = inference_stream_vllm(
+                llm_engine,
+                template,
+                request_list,
+                generation_config=VllmGenerationConfig(
+                    repetition_penalty=1.05,
+                    presence_penalty=True,
+                    max_tokens=500,
+                    temperature=0.3,
+                    top_p=0.7,
+                    top_k=20,
+                    skip_special_tokens=True,
+                    stop_token_ids=[151329, 151336, 151338]
+                )
+            )
     history = Delete_Specified_String(history)
-    return history
+    history.append({"role": "user", "content": message})
+    history.append({"role": "assistant", "content": ''})
+    for response_batch in response_iterator:
+        for response in response_batch:
+            # Print the answer
+            answer = response.get('response', '')
+            history[-1]['content'] = answer
+            # time.sleep(0.05)
+            yield history
+
 
 
 # def change_textbox(choice):
