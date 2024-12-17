@@ -27,14 +27,20 @@ if __name__ == '__main__':
 
     # for text in texts:
     while True:
+        print('question: ')
         text = input().strip()
-        request_list = [{'query': text}]
-        response = inference_vllm(llm_engine, template, request_list, 
+        request_list = [{'query': text, 'history':history}]
+        print("history:\n", history)
+        answer = inference_vllm(llm_engine, template, request_list, 
                                     generation_config=VllmGenerationConfig(repetition_penalty=1.05,
                                                                         presence_penalty=True,
                                                                         max_tokens=500,
                                                                         temperature=0.3,
                                                                         top_p=0.7,
                                                                         top_k=20,
-                                                                        skip_special_tokens=True))[0]['response']
-        print(response.replace('<|user|> ', '').strip(),'\n-----------------------------------\n')
+                                                                        skip_special_tokens=True,
+                                                                        stop_token_ids=[151329,151336,151338]))[0]
+        
+        response = answer['response']
+        history = answer['history']
+        print("answer: \n", response,'\n-----------------------------------\n')
