@@ -4,7 +4,7 @@
 
 # 训练框架
 
-我们主要使用ms-swift框架进行模型的训练，链接如下[https://github.com/modelscope/ms-swift?tab=readme-ov-file]
+我们主要使用ms-swift框架进行模型的训练，链接如下[https://github.com/modelscope/ms-swift?tab=readme-ov-file]，我们目前使用的swift版本为2.5.0（最新版本的swift3.x与2.x有代码上的差异，为了保证代码的正常运行，请使用swift 2.5.0），查看swift版本命令为 pip show ms-swift
 
 ## 安装
 
@@ -77,7 +77,7 @@ python eval_QA.py
 ```
 # 模型展示系统
 
-修改模型路径和权重路径后，终端输入python demo.py即可本地进行测试
+修改模型路径model_path后，终端输入python demo.py即可本地进行测试
 
 # 致谢
 本项目工作得到中国中文信息学会社会媒体处理专委会(SMP)-智谱 AI大模型交叉学科基金资助
