@@ -4,7 +4,8 @@
 
 # 训练框架
 
-我们主要使用ms-swift框架进行模型的训练，链接如下[https://github.com/modelscope/ms-swift?tab=readme-ov-file]，我们目前使用的swift版本为2.5.0（最新版本的swift3.x与2.x有代码上的差异，为了保证代码的正常运行，请使用swift 2.5.0），查看swift版本命令为 pip show ms-swift
+我们主要使用ms-swift框架进行模型的训练，链接如下[https://github.com/modelscope/ms-swift?tab=readme-ov-file]
+我们目前使用的swift版本为2.5.0（最新版本的swift3.x与2.x有代码上的差异，为了保证代码的正常运行，请使用swift 2.5.0），查看swift版本命令为 pip show ms-swift
 
 ## 安装
 
