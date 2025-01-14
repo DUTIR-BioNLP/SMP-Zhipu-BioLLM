@@ -17,7 +17,7 @@ if __name__ == '__main__':
     # lora_checkpoint = '/data/qjw/ms-swift-main/output/glm4-9b-chat/v6-20240924-223358/checkpoint-22400'
     # lora_request = LoRARequest('default-lora', 1, lora_checkpoint)
     model_path = "ms-swift-main/output/glm4-9b/v11-20241130-192255/checkpoint-100000"
-    model_type = ModelType.glm4_9b
+    model_type = ModelType.glm4_9b_chat
     llm_engine = get_vllm_engine(model_type, torch.bfloat16, model_id_or_path=model_path, enable_lora=True,
                                 max_loras=1, max_lora_rank=8, tensor_parallel_size=1,gpu_memory_utilization=0.9,max_model_len=8192)
     template_type = get_default_template_type(model_type)
